@@ -141,7 +141,7 @@ app.post("/theme/:id/like", (req, res) => {
   const allThemes = fs.readFileSync("./themes.txt");
   const allThemesJson = JSON.parse(allThemes) || [];
 
-  let updatedTheme = null;
+  let updatedTheme;
   const updatedThemes = allThemesJson.map((theme) => {
     if (theme.id === themeId) {
       if (theme.likes.includes(userId))
