@@ -212,8 +212,8 @@ const start = async () => {
     if (err) console.log(err);
   });
 
-  app.listen(3000, () => {
-    console.log(`backend started on 3000 port`);
+  app.listen(8080, () => {
+    console.log(`backend started on 8080 port`);
   });
 };
 start();
