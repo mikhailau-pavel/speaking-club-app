@@ -2,10 +2,6 @@ const express = require("express");
 const fs = require("fs");
 const cors = require("cors");
 
-const start = async () => {
-
-
-
 const app = express();
 app.use(express.json());
 app.use(
@@ -211,10 +207,7 @@ app.delete("/theme/:id/like", (req, res) => {
   });
 });
 
-
-
-
-
+const start = async () => {
   await fs.writeFile("./themes.txt", JSON.stringify([]), (err) => {
     if (err) console.log(err);
   });
