@@ -6,7 +6,7 @@ const app = express();
 app.use(express.json());
 app.use(
   cors({
-    origin: "*",
+    origin: "http://localhost:5173",
     methods: ["GET", "POST", "PUT", "DELETE"],
   })
 );
@@ -214,7 +214,7 @@ const start = async () => {
 
   const port = process.env.PORT || 8080;
   app.listen(port, () => {
-  console.log(`Listening on port ${port}`);
-});
+    console.log(`Listening on port ${port}`);
+  });
 };
 start();
