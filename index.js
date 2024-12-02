@@ -42,7 +42,7 @@ app.post("/theme", (req, res) => {
   const userId = req.headers["user-id"];
 
   if (!userId) res.status(400).send("No user id");
-  if (!themeData) res.status(400).send("No theme data");
+  if (!themeData.title) res.status(400).send("No theme data");
 
   const allThemes = fs.readFileSync("./themes.txt");
   const allThemesJson = JSON.parse(allThemes) || [];
