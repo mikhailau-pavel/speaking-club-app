@@ -65,11 +65,11 @@ app.post("/theme", (req, res) => {
   });
 
   res.send({
-    id: theme?.id,
-    title: theme?.title,
-    userId: theme?.userId,
-    likes: theme?.likes.length,
-    liked: theme?.likes.includes(userId),
+    id: theme.id,
+    title: theme.title,
+    userId: theme.userId,
+    likes: theme.likes.length,
+    liked: theme.likes.includes(userId),
   });
 });
 
