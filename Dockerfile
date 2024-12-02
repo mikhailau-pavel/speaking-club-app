@@ -1,17 +1,15 @@
 #Sample Dockerfile for NodeJS Apps
+FROM node:20-alpine
 
-FROM node:16
+WORKDIR /usr/src/app
 
-ENV NODE_ENV=production
 
-WORKDIR /
+COPY package*.json ./
 
-COPY ["./package.json", "./package-lock.json*", "./"]
-
-RUN npm install --production
+RUN npm install 
 
 COPY . .
-
+    
 EXPOSE 8080
 
 CMD [ "node", "app.js" ]
