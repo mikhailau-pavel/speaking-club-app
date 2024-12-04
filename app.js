@@ -40,7 +40,7 @@ app.get("/theme", (req, res) => {
 app.post("/theme", (req, res) => {
   const themeData = req.body;
   const userId = req.headers["user-id"];
-
+console.log(themeData,userId  )
   if (!userId) res.status(400).send("No user id");
   if (!themeData.title) res.status(400).send("No theme data");
 
@@ -88,7 +88,6 @@ app.put("/theme/:id", (req, res) => {
   const updatedThemes = allThemesJson.map((theme) => {
     if (theme.id === themeId && theme.userId === userId) {
       theme.title = themeData.title;
-
       updatedTheme = theme;
     }
     return theme;
