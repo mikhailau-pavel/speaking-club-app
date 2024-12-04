@@ -9,48 +9,44 @@ import {
 import DeviceInfo from 'react-native-device-info';
 
 export default function Topics() {
-  const [topic, setTopic] = useState('')
+  const [topic, setTopic] = useState('');
   const [topics, setTopics] = useState([]);
-  const [fp, setFp] = useState('')
-  const [counter, setCounter] = useState(0);
+  const [fp, setFp] = useState('');
+  const url = 'http://localhost:8080/theme';
 
-  const incrementCounter = () => setCounter(counter + 1);
-  const decrementCounter = () => setCounter(counter > 0 ? counter - 1 : 0);
-
-
-  useEffect(()=> {
+  useEffect(() => {
     DeviceInfo.getFingerprint().then((fingerprint) => {
-      setFp(fingerprint)
+      setFp(fingerprint);
     });
-  })
+  });
+
+  const addTopic = async (topic: string) => {
+    const post = await fetch(url, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json;charset=utf-8',
+        'user-id': 'test',
+      },
+      body: JSON.stringify({ title: topic }),
+    });
+    const t = await post.json();
+  };
 
   return (
     <View style={styles.container}>
-      <Text style={styles.label}>Add a Topic:{fp}</Text>
+      <Text style={styles.label}>Add a Topic</Text>
       <TextInput
         style={styles.input}
         placeholder="Enter topic"
         value={topic}
-        onChangeText={
-          (e) => setTopic(e)
-          }
+        onChangeText={(e) => setTopic(e)}
       />
-      <TouchableOpacity style={styles.button} onPress={decrementCounter}>
+      <TouchableOpacity style={styles.button} onPress={() => addTopic(topic)}>
         <Text style={styles.buttonText}>add</Text>
       </TouchableOpacity>
-      
-      <View style={styles.counterContainer}>
-        <TouchableOpacity style={styles.button} onPress={decrementCounter}>
-          <Text style={styles.buttonText}>-</Text>
-        </TouchableOpacity>
-        <Text style={styles.counter}>{counter}</Text>
-        <TouchableOpacity style={styles.button} onPress={incrementCounter}>
-          <Text style={styles.buttonText}>+</Text>
-        </TouchableOpacity>
-      </View>
     </View>
   );
-};
+}
 
 const styles = StyleSheet.create({
   container: {
